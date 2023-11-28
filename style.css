@@ -18,7 +18,7 @@ canvas {
 	width: 480px;
 	background-color: #cdcdcd;
 	border: solid 5px #161616;
-	display: block;
+	display: none;
 }
 
 .inputlogon {
@@ -69,6 +69,44 @@ button {
 	margin: 4px 2px;
 	cursor: pointer;
 }
+
+.ruleboard {
+  font-family: Princess;
+	position: absolute;
+	height: 640px;
+	width: 320px;
+	background-color: #808080;
+	border: solid 5px #454545;
+	display: block;
+}
+
+.ruleboard p, h1, h4{
+  position: relative;
+  left: 10px;
+}
+
+table {
+	position: relative;
+	left: 2%;
+	border-collapse: collapse;
+	width: 96%;
+}
+td, th {
+	border: 1px solid #161616;
+	text-align: center;
+	padding: 8px;
+}
+
+.hiscore {
+	font-family: Princess;
+	position: absolute;
+	left: 78%;
+	height: 640px;
+	width: 320px;
+	background-color: #808080;
+	border: solid 5px #454545;
+	display: block;
+  }
 /* 
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 header .header{

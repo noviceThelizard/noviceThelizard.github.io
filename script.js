@@ -8,15 +8,26 @@ function hideButton() {
     }
 }
 
-function hideLogon() {
+/* 
+    remember well,
+    in order to affect the style of all elements under a class,
+    one must use a for-loop as elementByClass are treated as arrays
+    unlike elementByIds which are treated as a singular entity.
+*/
+function hideLogon() { 
     let isHidden = document.getElementsByClassName("logon");
-    if (isHidden.style.display === "none")
-    {
-		isHidden.style.display = "block";
-    } else {
-        isHidden.style.display = "none";
+    
+    for (let i=0; i<isHidden.length; i++) {
+        if (isHidden[i].style.display === "none")
+        {
+            isHidden[i].style.display = "block";
+        } else {
+            isHidden[i].style.display = "none";
+        }
+        
     }
 }
+
 function gameStart()
 {
     playerA = [
