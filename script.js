@@ -8,6 +8,15 @@ function hideButton() {
     }
 }
 
+function hideLogon() {
+    let isHidden = document.getElementsByClassName("logon");
+    if (isHidden.style.display === "none")
+    {
+		isHidden.style.display = "block";
+    } else {
+        isHidden.style.display = "none";
+    }
+}
 function gameStart()
 {
     playerA = [
@@ -29,6 +38,7 @@ function gameStart()
     drawBoard("CanvasB_ID", playerB);
 
     document.getElementById("Bstart").disabled = true;
+    document.getElementById("Bstart").style.background = "#808080";
     gridC.strokeStyle = "#bfb556";
     gridC.stroke();
     roll();
@@ -76,19 +86,23 @@ function drawGrid()//draw all static component
     const gridC = gCoords.getContext("2d");
     
     gridC.strokeStyle = "#222222";
-    gridC.lineWidth = 3;
-    gridC.moveTo(25,75);//A
-    gridC.lineTo(50,25);
-    gridC.lineTo(75,75);
-    gridC.moveTo(125,25);//B
-    gridC.lineTo(175,50);
-    gridC.lineTo(125,75);
-    gridC.moveTo(175,50);
-    gridC.lineTo(125,50);
-    gridC.moveTo(250,25);//C
-    gridC.lineTo(225,50);
-    gridC.lineTo(250,75);
-    gridC.lineTo(275,50);
+    gridC.lineWidth = 5;
+    gridC.moveTo(20,50);//A
+    gridC.lineTo(40,10);
+    gridC.lineTo(60,50);
+    gridC.moveTo(100,10);//B
+    gridC.lineTo(140,30);
+    gridC.lineTo(100,50);
+    gridC.moveTo(100,30);
+    gridC.lineTo(140,30);
+    gridC.moveTo(200,10);//C
+    gridC.lineTo(180,30);
+    gridC.lineTo(200,50);
+    gridC.lineTo(220,30);
+    // gridC.moveTo(80,0);
+    // gridC.lineTo(80,60);
+    // gridC.moveTo(160,0);
+    // gridC.lineTo(160,60);
     gridC.stroke();
     
     //draws player 1 3x3 grid
@@ -97,16 +111,16 @@ function drawGrid()//draw all static component
     
     gridA.strokeStyle = "#BFB556";
     gridA.lineWidth = 3;
-    gridA.moveTo(100,0);
-    gridA.lineTo(100,350);
-    gridA.moveTo(200,350);
-    gridA.lineTo(200,0);
-    gridA.moveTo(0,100);
-    gridA.lineTo(300,100);
-    gridA.moveTo(300,200);
-    gridA.lineTo(0,200);
-    gridA.moveTo(0,300);
-    gridA.lineTo(300,300);
+    gridA.moveTo(80,0);
+    gridA.lineTo(80,290);
+    gridA.moveTo(160,290);
+    gridA.lineTo(160,0);
+    gridA.moveTo(0,80);
+    gridA.lineTo(240,80);
+    gridA.moveTo(240,160);
+    gridA.lineTo(0,160);
+    gridA.moveTo(0,240);
+    gridA.lineTo(240,240);
     gridA.stroke();
     
     //draws player 2 3x3 grid
@@ -115,16 +129,16 @@ function drawGrid()//draw all static component
             
     gridB.strokeStyle = "#CC896D";
     gridB.lineWidth = 3;
-    gridB.moveTo(100,0);
-    gridB.lineTo(100,350);
-    gridB.moveTo(200,350);
-    gridB.lineTo(200,0);
-    gridB.moveTo(0,150);
-    gridB.lineTo(300,150);
-    gridB.moveTo(300,250);
-    gridB.lineTo(0,250);
+    gridB.moveTo(80,0);
+    gridB.lineTo(80,290);
+    gridB.moveTo(160,290);
+    gridB.lineTo(160,0);
+    gridB.moveTo(0,130);
+    gridB.lineTo(240,130);
+    gridB.moveTo(240,210);
+    gridB.lineTo(0,210);
     gridB.moveTo(0,50);
-    gridB.lineTo(300,50);
+    gridB.lineTo(240,50);
     gridB.stroke();
 }
 function drawX(x,y,canvas)//complete, utility function
@@ -137,24 +151,24 @@ function drawX(x,y,canvas)//complete, utility function
 
     if (canvas.localeCompare("CanvasA_ID")==0)
     {
-        board.moveTo(11+x,11+y);
-        board.lineTo(22+x,22+y);
-        board.moveTo(11+x,22+y);
-        board.lineTo(22+x,11+y);
+        board.moveTo(8+x,8+y);
+        board.lineTo(16+x,16+y);
+        board.moveTo(8+x,16+y);
+        board.lineTo(16+x,8+y);
     } else if (canvas.localeCompare("CanvasB_ID")==0)
     {
-        board.moveTo(11+x,61+y);
-        board.lineTo(22+x,72+y);
-        board.moveTo(11+x,72+y);
-        board.lineTo(22+x,61+y);
+        board.moveTo(8+x,58+y);
+        board.lineTo(16+x,66+y);
+        board.moveTo(8+x,66+y);
+        board.lineTo(16+x,58+y);
     }
 
     board.stroke();
 }
 function drawCell(cellX,cellY,canvas,diceNum)//in-service
 {
-    let x = cellX*100;
-    let y = cellY*100;
+    let x = cellX*80;
+    let y = cellY*80;
 
     //clear cell
     clearCell(cellX,cellY,canvas);
@@ -162,26 +176,26 @@ function drawCell(cellX,cellY,canvas,diceNum)//in-service
     //middle-middle dot
     if (diceNum&1)
     {
-        drawX(x+33,y+33,canvas);
+        drawX(x+27,y+27,canvas);
     }
     //top-left and bottom-right
     if (diceNum>1)
     {
         drawX(x+0,y+0,canvas);
-        drawX(x+67,y+67,canvas);
+        drawX(x+53,y+53,canvas);
     }
 
     //bottom-left and top-right
     if (diceNum>3)
     {
-        drawX(x+67,y+0,canvas);
-        drawX(x+0,y+67,canvas);
+        drawX(x+53,y+0,canvas);
+        drawX(x+0,y+53,canvas);
     }
     //middle-left and middle-right
     if (diceNum>5)
     {
-        drawX(x+0,y+33,canvas);
-        drawX(x+67,y+33,canvas);
+        drawX(x+0,y+27,canvas);
+        drawX(x+53,y+27,canvas);
     }
 }
 function clearCell(cellX,cellY,canvas)//in-service
@@ -189,16 +203,16 @@ function clearCell(cellX,cellY,canvas)//in-service
     const currCanvas = document.getElementById(canvas);
     const board = currCanvas.getContext("2d");
 
-    let x = cellX*100;
-    let y = cellY*100;
+    let x = cellX*80;
+    let y = cellY*80;
 
     if (canvas.localeCompare("CanvasA_ID")==0)
     {
-        board.clearRect(x+5,y+5,90,90);
+        board.clearRect(x+5,y+5,70,70);
         board.beginPath();//idk why but without this, it wont clear the selected area
     } else if (canvas.localeCompare("CanvasB_ID")==0)
     {
-        board.clearRect(x+5,y+55,90,90);
+        board.clearRect(x+5,y+55,70,70);
         board.beginPath();
     }
     board.moveTo(0,0);
@@ -208,19 +222,19 @@ function drawScore(cellX,canvas)
 {
     const currCanvas = document.getElementById(canvas);
     const board = currCanvas.getContext("2d");
-    board.font = "50px Consolas";
+    board.font = "45px KelmscottRomanNF";
     board.strokeStyle = "#B4AD96";
-    let x = cellX*100;
+    let x = cellX*80;
 
     clearScore(cellX,canvas);
 
     if (canvas.localeCompare("CanvasA_ID")==0)
     {
-        board.strokeText(laneScoreCount(playerA,cellX),x+25,340);
+        board.strokeText(laneScoreCount(playerA,cellX),x+15,280);
         board.stroke();
     } else if (canvas.localeCompare("CanvasB_ID")==0)
     {
-        board.strokeText(laneScoreCount(playerB,cellX),x+25,40);
+        board.strokeText(laneScoreCount(playerB,cellX),x+15,40);
         board.stroke();
     }
 }
@@ -229,15 +243,15 @@ function clearScore(cellX, canvas)
     const currCanvas = document.getElementById(canvas);
     const board = currCanvas.getContext("2d");
 
-    let x = cellX*100;
+    let x = cellX*80;
     
     if (canvas.localeCompare("CanvasA_ID")==0)
     {
-        board.clearRect(x+5,305,85,45);
+        board.clearRect(x+5,245,70,45);
         board.beginPath();
     } else if (canvas.localeCompare("CanvasB_ID")==0)
     {
-        board.clearRect(x+5,0,85,45);
+        board.clearRect(x+5,0,70,45);
         board.beginPath();
     }
     board.moveTo(0,0);
@@ -382,6 +396,7 @@ function isFull()
 	
     turnSwitch(0);
     document.getElementById("Bstart").disabled = false;
+    document.getElementById("Bstart").style.background = "#8FADBF";
     document.getElementById("D6").innerHTML = "-";
     console.log("yes its full");
 }
@@ -429,33 +444,33 @@ canvas.addEventListener("click", function(event)//clicklistener for grid selecto
 
     switch(true)
     {
-        case (x<100 && turn==1 && playerA[0][0]==0)://A
+        case (x<80 && turn==1 && playerA[0][0]==0)://A
             fillA(diceScore,0);turnSwitch(2);
             roll();
             // console.log("A area");
             break;
-        case (x>100 && x<200 && turn==1 && playerA[1][0]==0):
+        case (x>80 && x<160 && turn==1 && playerA[1][0]==0):
             fillA(diceScore,1);turnSwitch(2);
             roll();
             // console.log("B area");
             break;
-        case (x>200 && x<300 && turn==1 && playerA[2][0]==0):
+        case (x>160 && x<240 && turn==1 && playerA[2][0]==0):
             fillA(diceScore,2);turnSwitch(2);
             roll();
             // console.log("C area");
             break;
 
-        case (x<100 && turn==2 && playerB[0][2]==0)://B
+        case (x<80 && turn==2 && playerB[0][2]==0)://B
             fillB(diceScore,0);turnSwitch(1);
             roll();
             // console.log("A area");
             break;
-        case (x>100 && x<200 && turn==2 && playerB[1][2]==0):
+        case (x>80 && x<160 && turn==2 && playerB[1][2]==0):
             fillB(diceScore,1);turnSwitch(1);
             roll();
             // console.log("B area");
             break;
-        case (x>200 && x<300 && turn==2 && playerB[2][2]==0):
+        case (x>160 && x<240 && turn==2 && playerB[2][2]==0):
             fillB(diceScore,2);turnSwitch(1);
             roll();
             // console.log("C area");
@@ -475,3 +490,4 @@ canvas.addEventListener("click", function(event)//clicklistener for grid selecto
     // console.table(scoreA);
     // console.table(scoreB);
 })
+
