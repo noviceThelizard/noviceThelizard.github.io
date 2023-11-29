@@ -18,7 +18,7 @@ canvas {
 	width: 480px;
 	background-color: #cdcdcd;
 	border: solid 5px #161616;
-	display: none;
+	/* display: none; */
 }
 
 .inputlogon {
